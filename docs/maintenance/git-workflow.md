@@ -4,10 +4,48 @@
 
 ### mainブランチへの反映の手順
 
-- mainブランチの別のブランチにいることを確認
+- mainブランチにいないことを確認
+```
+git branch
 
-https://gyazo.com/9284fa0bc692c955a8edeeb4d05ccb18![image](https://github.com/user-attachments/assets/c0a0ddc9-3ff8-44fd-8dcc-66d2f8728693)
+# 結果の例
+* feature/login
+  main
+  master
+```
 
+- リモートのmainブランチの全データを取得
+```
+git fetch origin
+```
 
-# リモートブランチの現在の状態をローカルに取り込む
+- mainブランチに移動してローカルのmainブランチの情報を最新のものにする
+```
+git switch main
+git pull origin main
+```
+- 作業中のブランチに切り替えてリベース
+```
+git switch feature-branch
+git rebase main
+```
+
+- リベース中に競合が発生した場合、修正してリベースを続けます
+```
+git status  # 競合しているファイルを確認
+# vscodeを用いて競合を解消
+git add <解消したファイル>
+git rebase --continue
+```
+
+- 作業中だったブランチをmainブランチにマージ
+```
+git checkout main
+git merge feature-branch
+``` 
+
+- リモートにpush
+```
+git push origin main
+```
 
